@@ -107,6 +107,23 @@ class Patient {
       });
     })
   }
+
+  static findPatient(input) {
+    return new Promise((resolve, reject) => {
+      this.findAll((err, patients) => {
+        if (err) {
+          reject(err);
+        } else {
+          let find = patients.filter(patient => patient.name == input || patient.id == input)
+          if (find.length) {
+            resolve(find);
+          } else {
+            reject(404)
+          }
+        }
+      });
+    })
+  }
   // lanjutkan method lain
 
   static findAll(cb) {

@@ -47,6 +47,9 @@ switch (command) {
     case "show":
       HospitalController.show(argument[0]);
       break;
+    case "findPatientBy":
+      HospitalController.findPatient(argument[0], argument[1])
+      break;
     default:
       HospitalController.help();
       break;

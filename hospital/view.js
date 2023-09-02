@@ -56,6 +56,10 @@ class HospitalView {
     console.log(data)
   }
 
+  static notFound() {
+    console.log('data tidak ditemukan')
+  }
+
   static helpView() {
     console.log(`// HOSPITAL INTERFACE COMMAND
     /*

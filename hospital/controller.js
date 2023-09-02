@@ -111,6 +111,18 @@ class HospitalController {
         HospitalView.notLoginView()
       })
     }
+
+    static findPatient(type, input) {
+      Employee.roleLogin().then(() => {
+        Patient.findPatient(input).then(data => {
+          HospitalView.showView(data);
+        }).catch(() => {
+          HospitalView.notFound();
+        })
+      }).catch(() => {
+        HospitalView.notLoginView();
+      })
+    }
 }
 
 
