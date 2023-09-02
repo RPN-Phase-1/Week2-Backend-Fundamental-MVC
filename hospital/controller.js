@@ -109,7 +109,17 @@ class HospitalController {
             HospitalView.helpView()
           }
         } else {
-          HospitalView.forbiddenView('show')
+          if (type === 'employee') {
+            HospitalView.forbiddenView('show employee')
+          } else if (type === 'patient') {
+            Patient.show().then((employess) => {
+              HospitalView.showView(employess)
+            }).catch(err => {
+              HospitalView.ErrorView(err)
+            });
+          } else {
+            HospitalView.helpView()
+          }
         }
       }).catch(() => {
         HospitalView.notLoginView()
