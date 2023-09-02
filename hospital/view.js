@@ -32,12 +32,41 @@ class HospitalView {
     console.log('username atau password salah');
   }
 
+  static someoneHasLoginView() {
+    console.log('kamu sudah login')
+  }
+
   static deletePatientView(id) {
     console.log(`data patien dengan id = ${id} berhasil dihapus`)
   }
 
   static patientNotFoundView() {
     console.log('data patient tidak ditemukan')
+  }
+
+  static logoutView(data) {
+    console.log(`${data.username} berhasil logout`)
+  }
+
+  static logoutNotFound() {
+    console.log('tidak ada yang login')
+  }
+
+  static showView(data) {
+    console.log(data)
+  }
+
+  static helpView() {
+    console.log(`// HOSPITAL INTERFACE COMMAND
+    /*
+    > node index.js register <username> <password> <jabatan> 
+    > node index.js login <username> <password>
+    > node index.js addPatient <id> <namaPasien> <penyakit1> <penyakit2> ....
+    > node index.js updatePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
+    > node index.js deletePatient <id>
+    > node index.js logout
+    > node index.js show <employee/patient> 
+    > node index.js findPatientBy: <name/id> <namePatient/idPatient>`)
   }
 }
 

@@ -23,10 +23,22 @@ class HospitalController {
 
     // lanjutkan command yang lain
     static login(username, password) {
-      Employee.login(username, password).then(() => {
-        HospitalView.loginView(username)
+      Employee.roleLogin().then(() => {
+        HospitalView.someoneHasLoginView();
       }).catch(() => {
-        HospitalView.loginFailedView();
+        Employee.login(username, password).then(() => {
+          HospitalView.loginView(username)
+        }).catch(() => {
+          HospitalView.loginFailedView();
+        })
+      })
+    }
+
+    static logout() {
+      Employee.logout().then((data) => {
+        HospitalView.logoutView(data)
+      }).catch(() => {
+        HospitalView.logoutNotFound();
       })
     }
 
@@ -69,6 +81,32 @@ class HospitalController {
             HospitalView.ErrorView(err);
           }
         })
+      }).catch(() => {
+        HospitalView.notLoginView()
+      })
+    }
+
+    static show(type) {
+      Employee.roleLogin().then(position => {
+        if (position === 'admin') {
+          if (type === 'employee') {
+            Employee.show().then((employess) => {
+              HospitalView.showView(employess)
+            }).catch(err => {
+              HospitalView.ErrorView(err)
+            });
+          } else if (type === 'patient') {
+            Patient.show().then((employess) => {
+              HospitalView.showView(employess)
+            }).catch(err => {
+              HospitalView.ErrorView(err)
+            });
+          } else {
+            HospitalView.helpView()
+          }
+        } else {
+          HospitalView.forbiddenView('show')
+        }
       }).catch(() => {
         HospitalView.notLoginView()
       })

@@ -78,12 +78,54 @@ class Employee {
             employees.splice(index,1,data)
             fs.writeFile("./employee.json", JSON.stringify(employees), (err) => {
               if (err) {
-                console.log(err);
+                reject(err);
               } else {
                 resolve();
               }
             })
           }
+        }
+      });
+    })
+  }
+
+  static logout() {
+    return new Promise((resolve, reject) => {
+      this.findAll((err, employees) => {
+        if (err) {
+          console.log(err);
+        } else {
+          let found = false;
+          employees.forEach((employee, i) => {
+            if (employee.login) {
+              employees[i].login = false;
+              found = employee;
+              return;
+            }
+          })
+          if (found) {
+            fs.writeFile("./employee.json", JSON.stringify(employees), (err) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(found);
+              }
+            })
+          } else {
+            reject(404)
+          }
+        }
+      });
+    })
+  }
+
+  static show() {
+    return new Promise((resolve, reject) => {
+      this.findAll((err, employees) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(employees)
         }
       });
     })
@@ -98,7 +140,6 @@ class Employee {
       }
     })
   }
- 
 
 }
 

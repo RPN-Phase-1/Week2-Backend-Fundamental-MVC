@@ -28,7 +28,9 @@ switch (command) {
     case "login":
       HospitalController.login(argument[0], argument[1]);
       break;
-    // buatlah semua command
+    case "logout":
+      HospitalController.logout();
+      break;
     case "addPatient":{
       const [id, name, ...diseases] = argument;
       HospitalController.addPatient(id, name, diseases)
@@ -41,6 +43,9 @@ switch (command) {
     }
     case "deletePatient":
       HospitalController.deletePatient(argument[0])
+      break;
+    case "show":
+      HospitalController.show(argument[0]);
       break;
     default:
       HospitalController.help();

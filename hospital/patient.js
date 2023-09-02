@@ -96,6 +96,17 @@ class Patient {
     })
   }
 
+  static show() {
+    return new Promise((resolve, reject) => {
+      this.findAll((err, patients) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(patients)
+        }
+      });
+    })
+  }
   // lanjutkan method lain
 
   static findAll(cb) {
