@@ -31,6 +31,14 @@ class HospitalView {
   static loginFailedView() {
     console.log('username atau password salah');
   }
+
+  static deletePatientView(id) {
+    console.log(`data patien dengan id = ${id} berhasil dihapus`)
+  }
+
+  static patientNotFoundView() {
+    console.log('data patient tidak ditemukan')
+  }
 }
 
 

@@ -40,19 +40,57 @@ class Patient {
         } else {
           let newData = data;
           let obj = new Patient(id, name, diseases)
+          let found = false;
           data.forEach((patient, i) => {
             if (patient.id === id) {
-              newData.splice(i,1,obj)  
+              newData.splice(i,1,obj)
+              found = true;  
               return
             }
           })
-          fs.writeFile("./patient.json", JSON.stringify(newData), (err) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(obj);
+
+          if (found) {
+            fs.writeFile("./patient.json", JSON.stringify(newData), (err) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(obj);
+              }
+            })
+          } else {
+            reject(404)
+          }
+        }
+      });
+    })
+  }
+
+  static deletePatient(id) {
+    return new Promise((resolve, reject) => {
+      this.findAll((err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          let newData = data;
+          let found = false;
+          data.forEach((patient, i) => {
+            if (patient.id === id) {
+              newData.splice(i,1)
+              found = patient;
+              return
             }
           })
+          if (found) {
+            fs.writeFile("./patient.json", JSON.stringify(newData), (err) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(id);
+              }
+            })
+          } else {
+            reject(404)
+          }
         }
       });
     })

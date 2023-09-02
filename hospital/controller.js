@@ -47,9 +47,29 @@ class HospitalController {
         Patient.updatePatient(id, name, diseases).then((data) => {
           HospitalView.updatePatientView(data)
         }).catch((err) => {
-          HospitalView.ErrorView(err);
+          if (err === 404) {
+            HospitalView.patientNotFoundView()
+          } else {
+            HospitalView.ErrorView(err);
+          }
         })
-      }).catch(role => {
+      }).catch(() => {
+        HospitalView.notLoginView()
+      })
+    }
+
+    static deletePatient(id) {
+      Employee.roleLogin().then(() => {
+        Patient.deletePatient(id).then((data) => {
+          HospitalView.deletePatientView(data)
+        }).catch((err) => {
+          if (err === 404) {
+            HospitalView.patientNotFoundView()
+          } else {
+            HospitalView.ErrorView(err);
+          }
+        })
+      }).catch(() => {
         HospitalView.notLoginView()
       })
     }
