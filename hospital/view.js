@@ -3,6 +3,10 @@ class HospitalView {
       console.log(`save data success {"username":${objArr[0].username},"password":${objArr[0].password},"role":${objArr[0].position}. Total employee : ${objArr[1]}`)
   }
 
+  static sameRegisterView() {
+    console.log('username sudah dipakai')
+  }
+
   static addPatientView(data) {
     console.log(`save data success {"id":${data[0].id}, "name": ${data[0].name}, diseases: ${data[0].diseases}} Total patient : ${data[1]}`)
   }

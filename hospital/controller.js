@@ -8,7 +8,11 @@ class HospitalController {
           if (position === 'admin') {
             Employee.register(name, password, role, (err, objArr) => {
               if (err) {
-                  HospitalView.ErrorView(err);
+                  if (err === 'has found') {
+                    HospitalView.sameRegisterView()
+                  } else {
+                    HospitalView.ErrorView(err);
+                  }
               } else {
                   HospitalView.registerView(objArr);
               }

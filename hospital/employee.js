@@ -36,6 +36,11 @@ class Employee {
       if (err) {
         console.log(err);
       } else {
+        let find = data.find((employee) => employee.username === name);
+        if (find) {
+          cb('has found')
+          return
+        }
         let obj = new Employee(name, password, role)
         let newData = data;
         newData.push(obj);
