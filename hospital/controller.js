@@ -123,6 +123,10 @@ class HospitalController {
         HospitalView.notLoginView();
       })
     }
+
+    static help() {
+      HospitalView.helpView()
+    }
 }
 
 
