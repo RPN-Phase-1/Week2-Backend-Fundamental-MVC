@@ -29,10 +29,6 @@ class HospitalView {
     console.log("Hanya Admin yang dapat mengakses data ini");
   }
 
-  static notDokterView() {
-    console.log('Hanya Dokter yg dapat mengatur data pasien');
-  }
-
   static logout() {
     console.log("Anda behasil Logout");
   }

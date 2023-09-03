@@ -32,18 +32,14 @@ class HospitalController {
 
   static addPatient(id, name, diseases) {
     Employee.roleLogin()
-      .then((role) => {
-        if (role === "dokter") {
-          Patient.addPatient(id, name, diseases)
-            .then((data) => {
-              HospitalView.addPatientView(data);
-            })
-            .catch((err) => {
-              HospitalView.ErrorView(err);
-            });
-        } else {
-          HospitalView.notDokterView();
-        }
+      .then(() => {
+        Patient.addPatient(id, name, diseases)
+          .then((data) => {
+            HospitalView.addPatientView(data);
+          })
+          .catch((err) => {
+            HospitalView.ErrorView(err);
+          });
       })
       .catch(() => {
         HospitalView.notLoginView();
@@ -52,18 +48,14 @@ class HospitalController {
 
   static updatePatient(id, name, diseases) {
     Employee.roleLogin()
-      .then((role) => {
-        if (role == "dokter") {
-          Patient.updatePatient(id, name, diseases)
-            .then((data) => {
-              HospitalView.updatePatientView(data);
-            })
-            .catch((err) => {
-              HospitalView.ErrorView(err);
-            });
-        } else {
-          HospitalView.notDokterView();
-        }
+      .then(() => {
+        Patient.updatePatient(id, name, diseases)
+          .then((data) => {
+            HospitalView.updatePatientView(data);
+          })
+          .catch((err) => {
+            HospitalView.ErrorView(err);
+          });
       })
       .catch(() => {
         HospitalView.notLoginView();
@@ -71,18 +63,14 @@ class HospitalController {
   }
   static deletePatient(id, name, diseases) {
     Employee.roleLogin()
-      .then((role) => {
-        if (role === "dokter") {
-          Patient.deletePatient(id, name, diseases)
-            .then((data) => {
-              HospitalView.deletePatientView(data);
-            })
-            .catch((err) => {
-              HospitalView.ErrorView(err);
-            });
-        } else {
-          HospitalView.notDokterView();
-        }
+      .then(() => {
+        Patient.deletePatient(id, name, diseases)
+          .then((data) => {
+            HospitalView.deletePatientView(data);
+          })
+          .catch((err) => {
+            HospitalView.ErrorView(err);
+          });
       })
       .catch(() => {
         HospitalView.notLoginView();
@@ -104,7 +92,7 @@ class HospitalController {
           } else {
             HospitalView.notAdminView();
           }
-        } else if(employeeOrPatient == 'patient') {
+        } else if (employeeOrPatient == "patient") {
           Patient.show()
             .then((data) => {
               HospitalView.showView(data);
@@ -113,7 +101,7 @@ class HospitalController {
               HospitalView.errorDataView();
             });
         } else {
-          HospitalView.help()
+          HospitalView.help();
         }
       })
       .catch(() => {
