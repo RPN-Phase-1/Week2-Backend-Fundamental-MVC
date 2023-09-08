@@ -12,12 +12,7 @@ class Employee extends Data {
 
     static register(username, password, role, cb) {
         this.dataEmployee((err, data) => {
-            // if error
             if (err) return cb(err);
-
-            // validations
-            if (!username || !password || !role)
-                return cb("username, Password or Role required");
 
             const employee = new Employee(username, password, role),
                 newData = data;
@@ -36,12 +31,7 @@ class Employee extends Data {
         this.dataEmployee((err, data) => {
             if (err) return cb(err);
 
-            // validations
-            if (!username || !password)
-                return cb("Username or Password required");
-
             const existLogin = data.filter(({ login }) => login);
-            // saya bingung harus mengembalikan pesan apa, jadi saya anggap saja, bahwa ini aplikasi untuk diri saya sendiri, jadi walaupun user yang login berbeda dengan apa yang saya input, intinya setiap data yang memiliki login true, akan saya anggap sudah login.
             if (existLogin.length) return cb("You are logged in");
 
             const exist = data.find(
@@ -101,8 +91,6 @@ class Employee extends Data {
             this.dataPatient((err, patients) => {
                 if (err) return cb(err);
 
-                if (!type) return cb("type required");
-
                 const employee = data.find(({ login }) => login);
                 if (!employee) return cb("you are not logged in");
 
@@ -119,14 +107,6 @@ class Employee extends Data {
                         return cb("you are not admin or dokter");
 
                     return cb(null, patients);
-                } else {
-                    if (
-                        employee.position !== "admin" &&
-                        employee.position !== "dokter"
-                    )
-                        return cb("you are not admin or dokter");
-
-                    return cb("invalid request");
                 }
             });
         });

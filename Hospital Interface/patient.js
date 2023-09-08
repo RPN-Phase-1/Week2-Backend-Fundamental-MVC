@@ -22,10 +22,6 @@ class Patient extends Data {
                 if (employee.position !== "dokter")
                     return cb("you are not a doctor");
 
-                if (!id || !name) return cb("Id or Name required");
-                if (!id || !name || !penyakit1)
-                    return cb("Id, Name or Desease 1 required");
-
                 const existId = data.find((patient) => patient.id === id);
                 if (existId) return cb("id already exists");
                 const existName = data.find((patient) => patient.name === name);
@@ -60,9 +56,6 @@ class Patient extends Data {
                 if (!employee) return cb("must login first");
                 if (employee.position !== "dokter")
                     return cb("you are not a doctor");
-
-                if (!id || !name || !penyakit1)
-                    return cb("Id, Name or Desease 1 required");
 
                 const patientExists = data.find((patient) => patient.id === id);
                 if (!patientExists)
@@ -103,8 +96,6 @@ class Patient extends Data {
                 if (employee.position !== "dokter")
                     return cb("you are not a doctor");
 
-                if (!id || !name) return cb("Id and Name required");
-
                 const patientExists = data.find(
                     (patient) => patient.id === id && patient.name === name
                 );
@@ -142,17 +133,15 @@ class Patient extends Data {
                 if (employee.position !== "dokter")
                     return cb("you are not a doctor");
 
-                if (!type || !field) return cb("Type and Field required");
-
                 if (type === "id") {
                     const patient = data.find(({ id }) => id === field);
                     if (!patient) return cb("patient not found");
                     cb(null, patient);
-                } else if (type === "name") {
+                } else {
                     const patient = data.find(({ name }) => name === field);
                     if (!patient) return cb("patient not found");
                     cb(null, patient);
-                } else cb("invalid request");
+                }
             });
         });
     }

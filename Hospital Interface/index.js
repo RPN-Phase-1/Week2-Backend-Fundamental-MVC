@@ -18,7 +18,6 @@ let HospitalController = require("./controller");
     1. HANYA DOKTER SAJA YANG BOLEH PAKAI COMMAND CRUD PATIENT.
     2. TIDAK BISA LOGIN BERSAMAAN.
     3. HANYA ADMIN SAJA YANG BISA MELIHAT SEMUA DATA EMPLOYEE.
-
 */
 
 switch (command) {
