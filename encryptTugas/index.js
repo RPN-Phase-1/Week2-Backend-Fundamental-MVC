@@ -15,8 +15,8 @@ function mainMenu() {
       });
     let pertanyaan = `
     Selamat datang apa yang akan anda lakukan ?
-    1. Enkripsi Text.
-    2. Dekripsi Text.
+    1. Enkripsi File.
+    2. Dekripsi File.
     3. Membuka enkripsi file dengan timer waktu tertenu.
     `
     
@@ -92,7 +92,7 @@ function menuEnkripsi(myFile,key,namaFile){
         const fileTerenkripsi = encrypt(myFile,key);
         fs.writeFileSync("output/"+namaFile,fileTerenkripsi);
         // fs.writeFileSync("output/"+namaFile,decryp(fileTerenkripsi,key),{encoding:"binary"});
-        console.log("enkripsi berhasil dilakukan")
+        console.log("enkripsi berhasil dilakukan silakan cek folder output")
         return
     }
     
@@ -100,3 +100,59 @@ function menuEnkripsi(myFile,key,namaFile){
 }
 
 
+function menuDekripsi(myFile,key,namaFile){
+    //pertanyaan untuk input file
+    if(!myFile){
+        const pertanyaan = "oke baik masukan silahkan letakan file yang ingin anda enkripsi di dalam folder input_dekripsi_file, kemudian masukan nama file anda berserta extensi contoh kucing.jpg : ";
+        const readline = require('readline').createInterface({
+            input: process.stdin,
+            output: process.stdout,
+          });
+        readline.question(pertanyaan, namaFile => {
+            readline.close();
+            namaFileAsli = namaFile;
+            switch (namaFile) {
+                case "q":
+                    return
+            }
+            try {
+                myFile = fs.readFileSync("input_dekripsi_file/"+namaFile,{encoding:"binary",flag:'r'});
+            } catch (error) {
+                console.log("File tidak ditemukan input q jika ingin keluar")
+                menuDekripsi()
+                return
+            }
+
+            //input kunci
+            if(!key){
+                const pertanyaan = "masukan kunci berbentuk text jangan sampai salah : ";
+                const readline = require('readline').createInterface({
+                    input: process.stdin,
+                    output: process.stdout,
+                });
+                readline.question(pertanyaan, kunci => {
+                    readline.close();
+                    key = kunci
+                    menuDekripsi(myFile,key,namaFile);
+                })
+            }
+        });
+
+    }else{
+        //buat output
+        let fileTerdekripsi
+        try {
+            fileTerdekripsi = decryp(myFile,key);
+            
+        } catch (error) {
+            console.log("Kunci Salah X Dekripsi gagal");
+            return
+        }
+        fs.writeFileSync("output_dekripsi_file/"+namaFile,fileTerdekripsi,{encoding:"binary"});
+        // fs.writeFileSync("output/"+namaFile,decryp(fileTerenkripsi,key),{encoding:"binary"});
+        console.log("dekripsi berhasil dilakukan silahkan cek folder output_dekripsi_file")
+        return
+    }
+    
+
+}
