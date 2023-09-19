@@ -206,13 +206,13 @@ function schejuleFile(myFile,key,time,namaFile){
                 setMinuteTime(time[0],myFile,key,namaFile);
                 break;
             case "jam":
-                console.log("maaf fitur berlum tersedia")
-                return
+                //console.log("maaf fitur berlum tersedia")
+                //return
                 setHourTime(time[0],myFile,key,namaFile);
                 break;  
                 case "hari":
-                console.log("maaf fitur berlum tersedia")
-                return
+                // console.log("maaf fitur berlum tersedia")
+                // return
                 setDayTime(time[0],myFile,key,namaFile);
                 break;
         
@@ -231,13 +231,13 @@ function schejuleFile(myFile,key,time,namaFile){
         function setHourTime(hour,myFile,key,namaFile){
             const newShecjule = addHour(hour);
             const now = getTime();
-            count(now,newShecjule,myFile,key,namaFile,time = 60000*60000);           
+            count(now,newShecjule,myFile,key,namaFile,time = 99999);           
         }
         
         function setDayTime(day,myFile,key,namaFile){
             const newShecjule = addDay(day);
             const now = getTime();
-            count(now,newShecjule,myFile,key,namaFile,time = 60000*60000*24);           
+            count(now,newShecjule,myFile,key,namaFile,time = 99999);           
         }
     }
 
