@@ -256,11 +256,11 @@ function count(now,newShecjule,myFile,key,namaFile,time,encripted){
         try {
             fileTerdekripsi = decryp(myFile,key);
         } catch (error) {
-            return
+            return error
         }
         if(fileTerdekripsi.slice(0,29)=="gagal pesan belum terenkripsi"){
-            console.log("Kunci Salah X Dekripsi gagal");
-            return
+            // console.log("Kunci Salah X Dekripsi gagal");
+            return "Kunci Salah X Dekripsi gagal"
         }        
         fs.writeFileSync("dekrip_berwaktu/"+namaFile,fileTerdekripsi,{encoding:"binary"});
         console.log("akses dibuka sampai tanggal " + newShecjule["tanggal"] + " jam " + newShecjule["jam"] + " didekripsi dengan nama file" + " dekrip_"+namaFile )
@@ -273,16 +273,17 @@ function count(now,newShecjule,myFile,key,namaFile,time,encripted){
         setInterval(()=>{
             //console.log(now)
             now = getTime();
-            count(now,newShecjule,myFile,key,namaFile,time,true)
+            return count(now,newShecjule,myFile,key,namaFile,time,true)
         }, time)
     }else{
         try {
             fs.writeFileSync("dekrip_berwaktu/"+namaFile,myFile,{encoding:"binary"});           
         } catch (error) {
-            console.log(error)
+            return console.log("error "+ error)
         }
-        console.log("akses ditutup")
+        console.log("Akses ditutup")
+        return mainMenu();
         err //biar ga eksekusi rekursif sebelumnya       
     }
-    return
+
 }
