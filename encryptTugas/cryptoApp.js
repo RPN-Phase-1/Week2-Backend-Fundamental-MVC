@@ -3,7 +3,12 @@ const encrypt = (message,key) =>{
     return CryptoJS.AES.encrypt(message,String(key)).toString();
 }
 const decryp = (chipertext,key) =>{
-    const plainText = CryptoJS.AES.decrypt(chipertext,key).toString(CryptoJS.enc.Utf8);
+    let  plainText
+    try {
+        plainText = CryptoJS.AES.decrypt(chipertext,key).toString(CryptoJS.enc.Utf8);
+    } catch (error) {
+        return "gagal pesan belum terenkripsi" + error
+    }
     if(plainText){
         return plainText
     }
