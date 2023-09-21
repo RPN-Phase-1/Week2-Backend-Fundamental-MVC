@@ -1,0 +1,20 @@
+{
+  "name": "encrypttugas",
+  "version": "1.0.0",
+  "description": "tugas hudza phase 1 week 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hudzzz01"
+  },
+  "author": "hudza",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "file-system": "^2.2.2",
+    "moment": "^2.29.4"
+  }
+}
