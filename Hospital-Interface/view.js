@@ -12,9 +12,16 @@ class HospitalView {
     }
 
     static ErrorView(err){
-        console.log("waduh error bang " + err);
+        console.log("Notifikasi ! \n" + err);
+    }
+    static LoginView(user){
+        console.log("Selamat Datang <3 "+ "paduka "+user["username"]+" dengan jabatan "+user["position"])
+    }
+    static LogoutView(user){
+        console.log("Sayonara <3 "+ "paduka "+user["username"]+" dengan jabatan "+user["position"])
     }
 }
+
 
 
 module.exports = HospitalView;

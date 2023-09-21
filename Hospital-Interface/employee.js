@@ -13,23 +13,75 @@ class Employee {
             cb(err)
         }else{
             let dataUser = result;
-            let user = dataUser.find((e)=>{
-                if(e["username"]==username && e["password"]==password){
-                    return e;
+            //cek session login
+            let sessionLogin = dataUser.find(e=>{
+                if(e["login"] == true){
+                    return e
                 }
             })
             
-            if(!user){
-               return cb("Username atau password salah");
+            if(sessionLogin){
+                if(sessionLogin["username"] == username){
+                    return cb("anda belum logout masih dalam session login dengan username " + username)
+                }else{
+                    return cb("session login terdeteksi. mohon logout dulu. akun yang ada gunakan sekarang adalah akun dengan username " + sessionLogin["username"])
+                }
+            }
+            
+            let indexUser;
+            for (let i = 0; i < dataUser.length; i++) {
+                const user = dataUser[i];
+                if(user["username"] == username && user["password"] == password){
+                    indexUser = i;
+                }
+            }
+            
+            //username password salah
+            if(!indexUser){
+                return cb("username atau password salah")
             }
 
-            user["login"] = true;
-            return cb(err,user);
+            //ubah statuslogin / berikan seassion login
+            dataUser[indexUser]["login"] = true;
+            this.writeEmployee(dataUser,(err,result)=>{
+                if(err){
+                    return cb(err);
+                }
+                cb(err,result[indexUser])
+            })
+                     
 
 
         }
     })
   }
+
+  static logout(cb){
+    this.findAll((err,result)=>{
+        let dataUser = result;
+        if(err){
+            return cb(err)
+        }
+        let userLoginIndex;
+        for (let i = 0; i < result.length; i++) {
+            const user = result[i];
+            if(user["login"] == true){
+                userLoginIndex = i;
+            }
+        }
+        if(!userLoginIndex){
+            return cb("anda belum login.")
+        }
+        dataUser[userLoginIndex]["login"] = false
+        this.writeEmployee(dataUser,(err,result)=>{
+            if(err){
+                return cb(err);
+            }
+            cb(err,result[userLoginIndex])
+        })
+
+
+  })}
 
   static register(name, password, role, cb) {
     //cb(true,"a");
@@ -77,6 +129,15 @@ static addUser(data,cb){
         if(err){
             cb(err);
             return
+        }
+        cb(err,data);
+    })
+}
+
+static writeEmployee(data,cb){
+    fs.writeFile("./employee.json",JSON.stringify(data),"utf-8",(err)=>{
+        if(err){
+            return cb(err);
         }
         cb(err,data);
     })

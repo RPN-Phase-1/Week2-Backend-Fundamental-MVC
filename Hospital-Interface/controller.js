@@ -20,7 +20,17 @@ class HospitalController {
             if(err){
                 HospitalView.ErrorView(err);
             }else{
-                HospitalView.login(result);
+                HospitalView.LoginView(result);
+            }
+        })
+    }
+
+    static logout(){
+        Employee.logout((err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.LogoutView(result);
             }
         })
     }
