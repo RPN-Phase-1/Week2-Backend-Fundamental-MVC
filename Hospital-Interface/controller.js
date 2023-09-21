@@ -34,6 +34,54 @@ class HospitalController {
             }
         })
     }
+    static addPatient(argument){
+        Employee.addPatient(argument,(err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.addPatientView(result);
+            }
+        })
+    }
+    static updatePatient(argument){
+        Employee.updatePatient(argument,(err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.updatePatientView(result);
+            }
+        })
+    }
+    static deletePatient(argument){
+        Employee.deletePatient(argument,(err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.deletePatientView(result);
+            }
+        })
+    }
+    
+    static findPatient(by, data){
+        Employee.findPatient(by, data,(err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.findPatient(result);
+            }
+        })
+    }
+
+    static show(argument){
+        Employee.show(argument,(err,result)=>{
+            if(err){
+                HospitalView.ErrorView(err);
+            }else{
+                HospitalView.show(result);
+            }
+        })
+    }
+
 
 
 
