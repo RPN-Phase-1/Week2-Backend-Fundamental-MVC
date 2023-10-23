@@ -3,26 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-<<<<<<< HEAD
   "dependencies": {
     "crypto-js": "^4.1.1",
     "moment": "^2.29.4"
   },
   "devDependencies": {},
-=======
->>>>>>> 48af385 (encryptTugas)
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-<<<<<<< HEAD
-  "license": "ISC"
-=======
+  "license": "ISC",
   "license": "ISC",
   "dependencies": {
     "crypto-js": "^4.1.1",
     "moment": "^2.29.4"
   }
->>>>>>> 48af385 (encryptTugas)
 }
