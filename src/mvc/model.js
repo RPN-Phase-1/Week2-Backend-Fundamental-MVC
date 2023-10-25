@@ -1,75 +1,116 @@
 import fs from 'fs'
 import path from "path";
+import JSONDBDriver from '../utils/JSONDBDriver'
 
 const dbDir = "/Users/yukenz/WebstormProjects/Week2-Backend-Fundamental-MVC/src/mvc/db"
-const employeeDB = path.resolve(dbDir, "employee.json")
-const patientDB = path.resolve(dbDir, "patient.json")
+
+export const employeeDB = new JSONDBDriver(path.resolve(dbDir, "employee.json"));
+export const patientDB = new JSONDBDriver(path.resolve(dbDir, "patient.json"));
+export const adminDB = new JSONDBDriver(path.resolve(dbDir, "admin.json"));
+
+export const JABATAN = ["admin", "doctor", "nurse"]
+
+class AdminRepository {
+
+    static findById(username) {
+        return adminDB.read()
+            .filter(admin => admin.username === username)[0]
+    }
+
+    static save(admin) {
+
+        const admins = adminDB.read()
+        admins.push(admin)
+
+        return adminDB.write(admins)
+    }
+
+    static delete(username) {
+        return adminDB.write(
+            adminDB.read().filter(admin => admin.username !== username)
+        )
+    }
+
+}
 
 class EmployeeRepository {
 
-    static findById(id) {
-        return JSONDBC.read(employeeDB)
-            .filter(employee => employee.id === id)[0]
+    static findById(username) {
+        return employeeDB.read()
+            .filter(employee => employee.username === username)[0]
     }
 
     static save(employee) {
 
-        const employees = JSONDBC.read(employeeDB)
+        const employees = employeeDB.read(employeeDB)
         employees.push(employee)
 
-        return JSONDBC.write(employeeDB, employee)
+        return employeeDB.write(employees)
     }
 
-    static delete(id) {
-        return JSONDBC.write(
-            employeeDB,
-            JSONDBC.read(employeeDB).filter(employee => employee.id !== id)
+    static delete(username) {
+        return employeeDB.write(
+            employeeDB.read().filter(employee => employee.username !== username)
         )
     }
 
+    static findAllByJabatan(jabatan = "") {
+        return employeeDB.read()
+            .filter(employee => employee.jabatan === jabatan)
+    }
+
     static findAll() {
-        return JSON.parse(fs.readFileSync(employeeDB).toString())
+        return employeeDB.read()
     }
 
 }
 
 class PatientRepository {
     static findById(id) {
-        return JSONDBC.read(patientDB)
-            .filter(employee => employee.id === id)[0]
+        return patientDB.read()
+            .filter(patient => patient.id === id)[0]
     }
 
-    static save(employee) {
+    static findByProp(prop, value) {
 
-        const employees = JSONDBC.read(patientDB)
-        employees.push(employee)
+        return patientDB.read()
+            .filter(patient => patient[prop] === value)
 
-        return JSONDBC.write(patientDB, employee)
+    }
+
+    static save(patient) {
+
+        const patients = patientDB.read()
+        patients.push(patient)
+
+        return patientDB.write(patients)
+    }
+
+    static update(patientUpdated) {
+
+        const patients = patientDB.read().map(patient => {
+
+            //filter entity yang { idkey : valuekey }
+            if (patient.id === patientUpdated.id) {
+                return patientUpdated
+            } else {
+                return patient
+            }
+
+        })
+        patientDB.write(patients)
+        return patientUpdated
     }
 
     static delete(id) {
-        return JSONDBC.write(
-            patientDB,
-            JSONDBC.read(patientDB).filter(employee => employee.id !== id)
+        return patientDB.write(
+            patientDB.read().filter(patient => patient.id !== id)
         )
     }
 
     static findAll() {
-        return JSON.parse(fs.readFileSync(patientDB).toString())
+        return patientDB.read()
     }
 }
 
-class JSONDBC {
-
-    static read(filePath) {
-        return JSON.parse(fs.readFileSync(filePath).toString())
-    }
-
-    static write(filePath, obj) {
-        fs.writeFileSync(filePath, JSON.stringify(obj), "utf-8")
-        return true
-    }
-
-}
-
-export {EmployeeRepository, PatientRepository}
+export {EmployeeRepository, PatientRepository, AdminRepository}

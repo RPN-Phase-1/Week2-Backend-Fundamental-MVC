@@ -1,1 +1,10 @@
-[{"name":"harlon","id":1}]
+[
+  {
+    "id": 51,
+    "name": "awan",
+    "penyakit": [
+      "mabok",
+      "mutah"
+    ]
+  }
+]
