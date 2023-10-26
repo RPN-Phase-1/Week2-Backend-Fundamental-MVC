@@ -104,7 +104,7 @@ export function show(status) {
             );
         case 'patient':
 
-            //Bukan dokter gabisa liat employe
+            //Bukan dokter gabisa liat pasien
             if (JABATAN.indexOf(session.jabatan) > JABATAN.indexOf("doctor")) {
                 return ErrView.hasNoAccess()
             }

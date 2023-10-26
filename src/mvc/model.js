@@ -74,7 +74,7 @@ class PatientRepository {
     static findByProp(prop, value) {
 
         return patientDB.read()
-            .filter(patient => patient[prop] === value)
+            .filter(patient => patient[prop] == value)
 
     }
 
@@ -114,3 +114,4 @@ class PatientRepository {
 }
 
 export {EmployeeRepository, PatientRepository, AdminRepository}
+export default {EmployeeRepository, PatientRepository, AdminRepository}

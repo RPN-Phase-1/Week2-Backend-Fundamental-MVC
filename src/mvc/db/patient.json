@@ -1,10 +1,18 @@
 [
   {
-    "id": 51,
-    "name": "awan",
+    "id": 1,
+    "name": "adwo",
     "penyakit": [
-      "mabok",
-      "mutah"
+      "pusing",
+      "malaria"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "dwd",
+    "penyakit": [
+      "pusing",
+      "malaria"
     ]
   }
 ]

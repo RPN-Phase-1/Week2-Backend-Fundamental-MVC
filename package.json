@@ -2,9 +2,10 @@
   "name": "week2-backend-fundamental-mvc",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "app": "node --es-module-specifier-resolution=node src/app.js"
   },
   "keywords": [],
   "author": "",
