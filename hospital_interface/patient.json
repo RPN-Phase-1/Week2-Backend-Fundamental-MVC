@@ -1,16 +1,2 @@
 [
-  {
-    "id": 1,
-    "nama": "Nakamura",
-    "penyakit": [
-      "Pilek"
-    ]
-  },
-  {
-    "id": 2,
-    "nama": "Husein",
-    "penyakit": [
-      "kaki_patah"
-    ]
-  }
 ]
