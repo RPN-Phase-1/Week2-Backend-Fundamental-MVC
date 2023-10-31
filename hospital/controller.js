@@ -17,11 +17,11 @@ class HospitalController {
     static login = (username, password) =>{
         Employee.login(username, password, (err, status) =>{
             if(err) {
-                HospitalView.ErrorView(err)
+               HospitalView.ErrorView(err)
             }else{
                 HospitalView.loginSuccess(status)
-            }
-        })
+                }
+            })  
     }
 
     static logout = () => {
@@ -31,53 +31,89 @@ class HospitalController {
     }
 
     static addPatient = (id, nama, penyakit) => {
-        Patient.addPatient(id, nama, penyakit, (err, objArr) => {
-            if(err) {
-                HospitalView.ErrorView(err)
-            } else{
-                HospitalView.addPatientView(objArr)
+        Employee.roleLogin((position) =>{
+            if(position === 'admin' || position == 'dokter'){
+                Patient.addPatient(id, nama, penyakit, (err, objArr) => {
+                    if(err) {
+                        HospitalView.ErrorView(err)
+                    } else{
+                        HospitalView.addPatientView(objArr)
+                    }
+                })
+            }else{
+                HospitalView.roleNotValid()
             }
         })
     }
 
     static updatePatient = (id, nama, penyakit) => {
-        Patient.updatePatient(id, nama, penyakit, (err, update) =>{
-            if(err) {
-                HospitalView.ErrorUpdateView(err)
+        Employee.roleLogin((position) => {
+            if(position == 'admin' || position == 'dokter'){
+                Patient.updatePatient(id, nama, penyakit, (err, update) =>{
+                    if(err) {
+                        HospitalView.ErrorUpdateView(err)
+                    }else{
+                        HospitalView.updateSuccessView(update)
+                    }
+                })
             }else{
-                HospitalView.updateSuccessView(update)
+                HospitalView.roleNotValid()
             }
         })
     }
 
     static deletePatient = (id, nama) => {
-        Patient.deletePatient(id,nama, (err,hapus) =>{
-            if(err){
-                HospitalView.ErrorView(err)
+        Employee.roleLogin((position) => {
+            if(position == 'admin' || position == 'dokter'){
+                Patient.deletePatient(id,nama, (err,hapus) =>{
+                    if(err){
+                        HospitalView.ErrorView(err)
+                    }else{
+                        HospitalView.deletePatientView(hapus)
+                    }
+                })          
             }else{
-                HospitalView.deletePatientView(hapus)
+                HospitalView.roleNotValid()
             }
         })
     }
 
     static showEmployee = () =>{
-        Employee.showEmployee((show) => {
-            HospitalView.showEmployeeView(show)
+        Employee.roleLogin((position) => {
+            if(position === 'admin'){
+                Employee.showEmployee((show) => {
+                    HospitalView.showEmployeeView(show)
+                })
+            }else{
+                HospitalView.roleNotValid()
+            }
         })
     }
 
     static showPatient = () => {
-        Patient.showPatient((show) => {
-            HospitalView.showPatientView(show)
+        Employee.roleLogin((position) => {
+            if(position == 'admin' || position == 'dokter'){
+                Patient.showPatient((show) => {
+                    HospitalView.showPatientView(show)
+                })         
+            }else{
+                HospitalView.roleNotValid()
+            }
         })
     }
 
     static findPatient =  (id,nama) => {
-        Patient.findPatient(id,nama,(err,show) => {
-            if(err){
-                HospitalView.errorPatientView(err)
-            }else{
-                HospitalView.showPatientView(show)
+        Employee.roleLogin((position) => {
+            if(position == 'dokter' || position == 'admin'){
+                Patient.findPatient(id,nama,(err,show) =>{
+                    if(err){
+                        HospitalView.errorPatientView(err)
+                    }else{
+                        HospitalView.findPatientView(show)
+                    }
+                })
+            } else{
+                HospitalView.roleNotValid()
             }
         })
     }

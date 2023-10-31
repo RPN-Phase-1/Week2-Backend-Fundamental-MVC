@@ -11,6 +11,14 @@ class HospitalView {
         console.log(`Login success, Welcome ${status.username}(role : ${status.position})`)
     }
 
+    static loginFailed(status){
+        console.log(`LOGIN FAILED, username or password incorrect`)
+    }
+
+    static doubleLoginView(){
+        console.log("You're already login, please logout first")
+    }
+
     static logoutSuccess(status){
         console.log(`Logout success`)
     }
@@ -37,6 +45,14 @@ class HospitalView {
 
     static errorPatientView(){
         console.log('Patient not found')
+    }
+
+    static findPatientView(show){
+        console.log(show)
+    }
+
+    static roleNotValid(){
+        console.log("You're not logged in / Your role doesn't has role to access this command")
     }
 
 

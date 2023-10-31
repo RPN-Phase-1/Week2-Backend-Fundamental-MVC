@@ -50,13 +50,32 @@ class Employee {
           }
         }
 
-        fs.writeFile("./employee.json", JSON.stringify(data) ,(err) =>{
-          if(err){
-            console.log(err)
-          } else {
-            cb(err, status)
+          fs.writeFile("./employee.json", JSON.stringify(data) ,(err) =>{
+            if(err){
+              console.log(err)
+            } else {
+              cb(err, status)
+            }
+          }) 
+          
+      }
+    })
+  }
+
+  static roleLogin = (cb) => {
+    this.findAll((err, data) => {
+      if(err){
+        console.log(err)
+      }else{
+        let role = null
+
+        for(let i = 0 ; i < data.length ; i++){
+          if(data[i].login == true){
+            role = data[i].position
+            break;
           }
-        })
+        }
+        cb(role)
       }
     })
   }
@@ -75,13 +94,17 @@ class Employee {
           }
         }
 
-        fs.writeFile("./employee.json", JSON.stringify(data) ,(err) =>{
-          if(err){
-            console.log(err)
-          } else {
-            cb(err, status)
-          }
-        })
+        if(!status){
+          console.log('Anda belum login, Silahkan login terlebih dahulu')
+        }else{
+          fs.writeFile("./employee.json", JSON.stringify(data) ,(err) =>{
+            if(err){
+              console.log(err)
+            } else {
+              cb(err, status)
+            }
+          })
+        }
       }
     })
   }
