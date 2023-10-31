@@ -15,13 +15,19 @@ class HospitalController {
 
     // lanjutkan command yang lain
     static login = (username, password) =>{
-        Employee.login(username, password, (err, status) =>{
-            if(err) {
-               HospitalView.ErrorView(err)
+        Employee.roleLogin((login) => {
+            if(login == null){
+              Employee.login(username, password, (err, status) =>{
+                if(err) {
+                   HospitalView.ErrorView(err)
+                }else{
+                    HospitalView.loginSuccess(status)
+                    }
+                })   
             }else{
-                HospitalView.loginSuccess(status)
-                }
-            })  
+                HospitalView.doubleLoginView()
+            }
+        })
     }
 
     static logout = () => {
