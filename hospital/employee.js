@@ -30,7 +30,7 @@ class Employee {
             const login = data.find((employee) => employee.login === true);
 
             if(login){
-                cb(`Already Login as ${login.username}, logout first`)
+                cb(`Already Login as ${login.username}, logout first`, null)
             }else{
 
                 if (user) {
@@ -54,6 +54,33 @@ class Employee {
         }
     })
 
+  }
+
+  static logout(cb){
+    this.findAll((err, data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            const login = data.find((employee) => employee.login === true);
+
+
+            if(login){
+                
+                    login.login = false; 
+                    fs.writeFile("./employee.json", JSON.stringify(data), (err) => {
+                        if (err) {
+                        console.log(err);
+                        cb(err, null);
+                        } else {
+                        cb(null, login);
+                        }
+                });
+                
+                
+            }
+
+        }
+    })
   }
 
   static register(name, password, role, cb) {

@@ -26,6 +26,15 @@ class HospitalController {
         })
     }
 
+    static logout(){
+        Employee.logout((err, data)=>{
+            if(err){
+                HospitalView.ErrorView(err)
+            }else{
+                HospitalView.logoutView(data)
+            }
+        })
+    }
     static help(){
         
         HospitalView.helpView()

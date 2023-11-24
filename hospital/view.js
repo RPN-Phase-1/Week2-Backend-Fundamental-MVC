@@ -14,6 +14,10 @@ class HospitalView {
     static loginView(username, password){
         console.log(`login success {"username":${username},"password":${password}}`);
     }
+
+    static logoutView(data){
+        console.log(`logout as ${data.username}`);
+    }
     static helpView(){
         console.log(
             `
