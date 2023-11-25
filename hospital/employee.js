@@ -108,6 +108,16 @@ class Employee {
     });
   }
 
+  static showEmployee(cb){
+    this.findAll((err,obj)=>{
+      if(err){
+        cb(err,null)
+      }else{
+        cb(null, obj)
+      }
+    })
+  }
+
   // lanjutkan method lain
 
   static findAll(cb) {

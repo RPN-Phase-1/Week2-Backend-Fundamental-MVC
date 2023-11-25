@@ -138,6 +138,100 @@ class HospitalController {
         })
     }
 
+    static showPatient(){
+        Employee.findAll((err,obj)=>{
+            if(err){
+                HospitalView.ErrorView(err)
+            }else{
+                let isDokter = false
+                for (let i = 0; i < obj.length; i++) {
+                    if(obj[i].login===true && obj[i].position === "dokter"){
+                        isDokter = true
+                     }
+                 
+                    
+                } 
+                if(isDokter){
+                    Patient.showPatient((err, objArr)=>{
+                        if(err){
+                            HospitalView.ErrorView(err)
+                        }else{
+                            HospitalView.deletePatient(objArr);
+                        }
+                                       
+                    })
+    
+                }else{
+                    HospitalView.ErrorView("u are not doctor")
+                }
+
+            }
+        })
+
+    }
+
+    static showEmployee(){
+        Employee.findAll((err,obj)=>{
+            if(err){
+                HospitalView.ErrorView(err)
+            }else{
+                let isAdmin = false
+                for (let i = 0; i < obj.length; i++) {
+                    if(obj[i].login===true && obj[i].position === "admin"){
+                        isAdmin = true
+                     }
+                 
+                    
+                } 
+                if(isAdmin){
+                    Employee.showEmployee((err, objArr)=>{
+                        if(err){
+                            HospitalView.ErrorView(err)
+                        }else{
+                            HospitalView.deletePatient(objArr);
+                        }
+                                       
+                    })
+    
+                }else{
+                    HospitalView.ErrorView("u are not admin")
+                }
+
+            }
+        })
+
+    }
+
+    static findPatient(id,name){
+        Employee.findAll((err,obj)=>{
+            if(err){
+                HospitalView.ErrorView(err)
+            }else{
+                let isDokter = false
+                for (let i = 0; i < obj.length; i++) {
+                    if(obj[i].login===true && obj[i].position === "dokter"){
+                        isDokter = true
+                     }
+                 
+                    
+                } 
+                if(isDokter){
+                    Patient.findPatient(id, name,(err, objArr)=>{
+                        if(err){
+                            HospitalView.ErrorView(err)
+                        }else{
+                            HospitalView.findPatient(objArr);
+                        }
+                                       
+                    })
+    
+                }else{
+                    HospitalView.ErrorView("u are not doctor")
+                }
+            }
+        })
+    }
+
 
 
     static help(){

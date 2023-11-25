@@ -31,6 +31,22 @@ class HospitalView {
     static logoutView(data){
         console.log(`logout as ${data.username}`);
     }
+
+    static showPatient(data){
+        console.log('patient: ', data);
+        
+    }
+
+    static showEmployee(data){
+        console.log('employee: ', data);
+        
+    }
+
+    static findPatient(data){
+        console.log('patient: ', data.id ," ", data.name, " ", data.diseases);
+    }
+    
+
     static helpView(){
         console.log(
             `
@@ -41,9 +57,9 @@ class HospitalView {
             v node index.js login <username> <password>
             v node index.js addPatient <id> <namaPasien> <penyakit1> <penyakit2> ....
             v node index.js updatePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-            > node index.js deletePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
+            v node index.js deletePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
             v node index.js logout
-            > node index.js show <employee/patient> 
+            v node index.js show <employee/patient> 
             > node index.js findPatientBy: <name/id> <namePatient/idPatient>
             
             NOTE :

@@ -21,6 +21,23 @@ class Patient {
     })
   }
 
+  static findPatient(id, name, cb){
+    this.findAll((err,obj)=>{
+      if(err){
+        cb(err)
+      }else{
+        let patient = null
+        for (let i = 0; i < obj.length; i++) {
+            if(obj[i].id == id && obj[i].name==name){
+              patient = obj[i]
+            }
+          
+        }
+        cb(null, patient)
+      }
+    })
+  }
+
   static addPatient(id, name, diseases, cb){
     this.findAll((err, data)=>{
       if(err){
@@ -106,6 +123,17 @@ class Patient {
     })
   }
 
+  static showPatient(cb){
+    this.findAll((err,obj)=>{
+      if(err){
+        cb(err,null)
+      }else{
+        cb(null, obj)
+      }
+    })
+  }
+
+  
 
 
  

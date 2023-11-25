@@ -42,6 +42,18 @@ switch (command) {
         HospitalController.deletePatient(argument[0]);
         break;
 
+    case "showpatient":
+        HospitalController.showPatient();
+        break;
+    
+    case "showemployee":
+        HospitalController.showEmployee();
+        break;
+
+    case "findpatient":
+        HospitalController.findPatient(argument[0], argument[1]);
+        break;
+        
     case "logout":
         HospitalController.logout();
         break;
