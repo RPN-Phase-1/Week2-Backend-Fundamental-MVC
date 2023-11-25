@@ -9,15 +9,7 @@ class Employee {
     this.login = false;
   }
 
-  static checkRole(){
-    this.findAll((err, data)=>{
-        if(err){
-            console.log(err);
-        }else{
-
-        }
-    })
-  }
+ 
 
   static login(username, password, cb){
     this.findAll((err, data)=>{
@@ -84,26 +76,34 @@ class Employee {
   }
 
   static register(name, password, role, cb) {
+
     this.findAll((err, data) => {
       if (err) {
         console.log(err);
       } else {
-        let obj = new Employee(name, password, role)
-        let newData = data;
-        newData.push(obj);
-        let objArr = [];
 
-        objArr.push(obj);
-        objArr.push(newData.length);
+        
 
+        
+          let obj = new Employee(name, password, role)
+          let newData = data;
+          newData.push(obj);
+          let objArr = [];
+  
+          objArr.push(obj);
+          objArr.push(newData.length);
+  
+  
+          fs.writeFile("./employee.json", JSON.stringify(newData), (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              cb(err, objArr);
+            }
+          })
 
-        fs.writeFile("./employee.json", JSON.stringify(newData), (err) => {
-          if (err) {
-            console.log(err);
-          } else {
-            cb(err, objArr);
-          }
-        })
+        
+      
       }
     });
   }

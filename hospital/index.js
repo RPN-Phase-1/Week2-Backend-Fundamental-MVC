@@ -30,6 +30,10 @@ switch (command) {
         HospitalController.login(argument[0], argument[1]);
         break;
 
+    case "addpatient":
+        HospitalController.addPatient(argument[0], argument[1], argument[2]);
+        break;
+
     case "logout":
         HospitalController.logout();
         break;

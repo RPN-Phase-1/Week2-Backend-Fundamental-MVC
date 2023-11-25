@@ -15,6 +15,10 @@ class HospitalView {
         console.log(`login success {"username":${username},"password":${password}}`);
     }
 
+    static addPatient(objArr){
+        console.log(`add data patient success {"id":${objArr[0].id},"name":${objArr[0].name},"diseases":${objArr[0].diseases}. Total patient : ${objArr[1]}`)
+    }
+
     static logoutView(data){
         console.log(`logout as ${data.username}`);
     }
