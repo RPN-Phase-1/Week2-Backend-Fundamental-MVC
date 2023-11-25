@@ -48,6 +48,66 @@ class Patient {
       }
     })
   }
+
+  static updatePatient(id, name, diseases, cb){
+    this.findAll((err, data)=>{
+      if(err){
+        cb(err, null)
+      }else{
+
+        const user = data.find((patient)=>patient.id == id)
+
+        
+        if(user){
+          user.name = name
+          user.diseases = diseases
+
+          fs.writeFile("./patient.json", JSON.stringify(data), (err) => {
+            if (err) {
+              console.log(err);
+              cb(err, null);
+            } else {
+              cb(null, user);
+            }
+          });
+
+        }else {
+          cb("Invalid data", null);
+        }
+          
+
+
+      }
+    })
+  }
+
+  static deletePatient(id, cb){
+    this.findAll((err,data)=>{
+      if(err){
+        cb(err,null)
+      }else{
+        // const user = data.findIndex((patient)=>patient.id = id)
+
+        // if(user > -1){
+        //   data.splice(user,1)
+        // }
+        const newData = data.filter((patient) => patient.id !== id);
+
+        fs.writeFile("./patient.json", JSON.stringify(newData), (err) => {
+          if (err) {
+            console.log(err);
+            cb(err, null);
+          } else {
+            cb(null, newData);
+          }
+        });
+
+      }
+    })
+  }
+
+
+
  
 
 }

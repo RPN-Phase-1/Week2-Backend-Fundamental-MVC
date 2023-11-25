@@ -19,6 +19,15 @@ class HospitalView {
         console.log(`add data patient success {"id":${objArr[0].id},"name":${objArr[0].name},"diseases":${objArr[0].diseases}. Total patient : ${objArr[1]}`)
     }
 
+    static updatePatient(objArr){
+        console.log('update data patient success: ', objArr);
+        
+    }
+
+    static deletePatient(id){
+        console.log('delete data patient success: ', id);
+    }
+
     static logoutView(data){
         console.log(`logout as ${data.username}`);
     }
@@ -28,12 +37,12 @@ class HospitalView {
        
             // HOSPITAL INTERFACE COMMAND
             
-            > node index.js register <username> <password> <jabatan> 
-            > node index.js login <username> <password>
-            > node index.js addPatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-            > node index.js updatePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
+            v node index.js register <username> <password> <jabatan> 
+            v node index.js login <username> <password>
+            v node index.js addPatient <id> <namaPasien> <penyakit1> <penyakit2> ....
+            v node index.js updatePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
             > node index.js deletePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-            > node index.js logout
+            v node index.js logout
             > node index.js show <employee/patient> 
             > node index.js findPatientBy: <name/id> <namePatient/idPatient>
             

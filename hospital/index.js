@@ -34,6 +34,14 @@ switch (command) {
         HospitalController.addPatient(argument[0], argument[1], argument[2]);
         break;
 
+    case "updatepatient":
+        HospitalController.updatePatient(argument[0], argument[1], argument[2]);
+        break;
+
+    case "deletepatient":
+        HospitalController.deletePatient(argument[0]);
+        break;
+
     case "logout":
         HospitalController.logout();
         break;
