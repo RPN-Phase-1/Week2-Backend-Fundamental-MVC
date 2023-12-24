@@ -7,10 +7,10 @@ class HospitalController {
   static async register(name, password, role) {
     try {
       // Validasi hanya boleh ada 2 role.
-      if (role === "Dokter" || role === "dokter" || role === 'Admin' || role === 'admin') {
+      if (role.toLowerCase() === "dokter" || role.toLowerCase() === 'admin') {
         const objArr = await Employee.register(name, password, role);
         HospitalView.registerView(objArr);
-      } else if (role !== "Dokter" || role !== "dokter" || role !== 'Admin' || role !== 'admin'){
+      } else {
         throw new Error('Role yang tersedia: [Dokter] [Admin]. Silahkan register kembali.');
       }
     } catch (err) {
