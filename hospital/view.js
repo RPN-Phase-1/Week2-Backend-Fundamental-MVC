@@ -5,8 +5,12 @@ class HospitalView {
             console.log(`save data success {"username":${objArr[0].username},"password":${objArr[0].password},"role":${objArr[0].position}. Total employee : ${objArr[1]}}`)
     }
 
-    static loginView(countData){
-        console.log(`Login are succesfull.... Hello (${countData.position}) - ${countData.username}`)
+    static loginView(loginInformation){
+        if (loginInformation !== null){
+            console.log(`Login are succesfull.... Hello (${loginInformation.position}) - ${loginInformation.username}`)
+        } else {
+            console.log('login failed')
+        }
     }
 
     static addPatientView(objPatient){

@@ -120,7 +120,7 @@ static async validationPosition(){
 
         for (let i = 0; i < countData.length; i++){
             if (countData[i].login === true){
-                return countData[i].position
+                return countData[i]
             }
         }
         return null
