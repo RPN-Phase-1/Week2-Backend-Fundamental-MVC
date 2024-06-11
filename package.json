@@ -1,0 +1,12 @@
+{
+  "name": "week2-backend-fundamental-mvc",
+  "module": "index.ts",
+  "type": "module", 
+  "dependencies": { "crypto-js": "^4.2.0", "moment": "^2.30.1" },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
