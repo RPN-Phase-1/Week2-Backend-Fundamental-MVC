@@ -2,13 +2,13 @@ import process from "process";
 import HospitalController from "./controller";
 import HospitalView from "./view";
 
-function main() {
+const main = async () => {
   const [_, __, command, ...args] = process.argv;
   try {
     switch (command) {
-      case "register": HospitalController.register(...args); break;
-      case "login": HospitalController.login(...args); break;
-      case "logout": HospitalController.logout(); break;
+      case "register": await HospitalController.register(...args); break;
+      case "login": await HospitalController.login(...args); break;
+      case "logout": await HospitalController.logout(); break;
       default: HospitalController.help(); break;
     }
   } catch (e) {
@@ -16,4 +16,4 @@ function main() {
   }
 }
 
-main();
+void main();
