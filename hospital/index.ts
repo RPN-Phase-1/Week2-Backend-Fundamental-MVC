@@ -9,6 +9,11 @@ const main = async () => {
       case "register": await HospitalController.register(...args); break;
       case "login": await HospitalController.login(...args); break;
       case "logout": await HospitalController.logout(); break;
+      case "show": await HospitalController.show(...args); break;
+      case "addPatient": await HospitalController.addPatient(...args); break;
+      case "deletePatient": await HospitalController.deletePatient(...args); break;
+      case "updatePatient": await HospitalController.updatePatient(...args); break;
+      case "findPatientBy": await HospitalController.findPatientBy(...args); break;
       default: HospitalController.help(); break;
     }
   } catch (e) {
