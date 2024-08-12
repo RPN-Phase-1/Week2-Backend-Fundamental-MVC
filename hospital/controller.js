@@ -19,11 +19,11 @@ class HospitalController {
   // login logic
   static login(name, password) {
     // cek apakah ada yg statusnya login
-    Employee.islogin((err, isNotLoggedin) => {
+    Employee.islogin((err, isLoggedin) => {
       if (err) {
         HospitalView.errorView(err);
       } else {
-        if (isNotLoggedin) {
+        if (isLoggedin) {
           HospitalView.errorView(err);
         } else {
           // jalankan method login di file employee
@@ -51,7 +51,83 @@ class HospitalController {
   }
 
   static addPatient(id, name, diseases) {
-    //
+    Employee.islogin((err, isLoggedIn) => {
+      if (!isLoggedIn) {
+        HospitalView.noLoginView();
+      } else {
+        Patient.addPatient(id, name, diseases, (err, data) => {
+          if (err) {
+            HospitalView.errorView(err);
+          } else {
+            HospitalView.addPatientView(data);
+          }
+        });
+      }
+    });
+  }
+
+  static updatePatient(id, name, diseases) {
+    Employee.islogin((err, isLoggedIn) => {
+      if (!isLoggedIn) {
+        HospitalView.noLoginView();
+      } else {
+        Patient.updatePatient(id, name, diseases, (err, data) => {
+          if (err) {
+            HospitalView.errorView(err);
+          } else {
+            HospitalView.updatePatient(data);
+          }
+        });
+      }
+    });
+  }
+
+  static deletePatient(id) {
+    Employee.islogin((err, isLoggedIn) => {
+      if (!isLoggedIn) {
+        HospitalView.noLoginView();
+      } else {
+        Patient.deletePatient(id, (err, deletedPatient) => {
+          if (err) {
+            HospitalView.errorView(err);
+          } else {
+            HospitalView.deletePatient(deletedPatient);
+          }
+        });
+      }
+    });
+  }
+
+  static show(dataShowing) {
+    Employee.islogin((err, isLoggedIn) => {
+      if (!isLoggedIn) {
+        HospitalView.noLoginView(err);
+      } else {
+        if (dataShowing === undefined) {
+          HospitalView.errorView("mau showing apa bos?");
+        } else if (dataShowing.toLowerCase() !== "patient" && dataShowing.toLowerCase() !== "employee") {
+          HospitalView.errorView("hanya bisa show patient atau employee!");
+        } else {
+          if (dataShowing.toLowerCase() === "employee") {
+            Employee.showEmployee((err, data) => {
+              if (err) {
+                HospitalView.errorView(err);
+              } else {
+                HospitalView.showEmployee(data);
+              }
+            });
+          } else {
+            Patient.showPatient((err, data) => {
+              if (err) {
+                HospitalView.errorView(err);
+              } else {
+                HospitalView.showPatient(data);
+              }
+            });
+          }
+        }
+      }
+    });
   }
 
   // lanjutkan command yang lain

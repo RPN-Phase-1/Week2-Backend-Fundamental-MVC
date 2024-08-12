@@ -11,10 +11,37 @@ class HospitalView {
     console.log(`${employee.username} berhasil logout`);
   }
 
+  static addPatientView(patient) {
+    console.log(`Berhasil menambahkan pasien dengan NIK : ${patient[0].id}, nama : ${patient[0].name}, dengan penyakit : ${patient[0].diseases}`);
+  }
+
+  static updatePatient(patient) {
+    console.log(`Pasien NIK: ${patient.id} diubah. Nama: ${patient.name}, penyakit: ${patient.diseases}`);
+  }
+
+  static deletePatient(patient) {
+    console.log(`Pasien NIK: ${patient.id} dihapus`);
+  }
+
   // lanjutkan method lain
 
   static errorView(err) {
     console.log(err);
+  }
+
+  static noLoginView() {
+    console.log("harap login terlebih dahulu");
+  }
+
+  static showEmployee(data) {
+    console.log("Daftar Pegawai:");
+
+    for (const employee of data) {
+      console.log(`- nama: ${employee.username}, posisi: ${employee.position}`);
+    }
+  }
+  static showPatient(data) {
+    console.log(data);
   }
 
   static help() {

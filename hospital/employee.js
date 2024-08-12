@@ -58,11 +58,24 @@ class Employee {
       } else {
         // cek apakah ada data[i].login === true
         let loggedInEmployee = data.find((e) => e.login === true);
+        // dijalankan kalau ada yg login
         if (loggedInEmployee) {
-          cb("ada akun yg sedang login, harap logout dulu");
+          cb("ada akun yg sedang login, harap logout dulu", true);
         } else {
           cb(err, false);
         }
+      }
+    });
+  }
+
+  static whoIsLoggedIn(cb) {
+    this.findAll((err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        const employeeWhoLoggedIn = data.find((e) => e.login === true);
+        const employeePosition = employeeWhoLoggedIn.position;
+        cb(err, employeePosition);
       }
     });
   }
@@ -100,6 +113,20 @@ class Employee {
     });
   }
 
+  static showEmployee(cb) {
+    this.isAdminLoggedIn((err, adminEmployee, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        if (!adminEmployee) {
+          cb("Hanya admin yg bisa akses!");
+        } else {
+          cb(err, data);
+        }
+      }
+    });
+  }
+
   static logout(cb) {
     this.findAll((err, data) => {
       if (err) {
@@ -114,7 +141,7 @@ class Employee {
             if (err) {
               cb(err);
             } else {
-              cb(err, employee);
+              cb(err, employee, data);
             }
           });
         }
@@ -123,6 +150,36 @@ class Employee {
   }
 
   // lanjutkan method lain
+
+  static isAdminLoggedIn(cb) {
+    this.findAll((err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        const employeeLoggedIn = data.find((e) => e.login === true);
+        if (employeeLoggedIn.position === "dokter") {
+          cb(err, false);
+        } else {
+          cb(err, true, data);
+        }
+      }
+    });
+  }
+
+  static isDokterLoggedIn(cb) {
+    this.findAll((err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        const employeeLoggedIn = data.find((e) => e.login === true);
+        if (employeeLoggedIn.position === "admin") {
+          cb(err, false);
+        } else {
+          cb(err, true);
+        }
+      }
+    });
+  }
 
   // findAll untuk read file JSON dan parse to object
   static findAll(cb) {

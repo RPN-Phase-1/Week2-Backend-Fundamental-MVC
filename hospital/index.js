@@ -30,23 +30,19 @@ switch (command) {
     HospitalController.login(arguments[0], arguments[1]);
     break;
   case "addPatient":
-    console.log("fitur belum terbuka, silakan tunggu :)");
-    // HospitalController.addPatient(arguments[0], arguments[1], arguments.slice(2));
+    HospitalController.addPatient(arguments[0], arguments[1], arguments.slice(2));
     break;
   case "updatePatient":
-    console.log("fitur belum terbuka, silakan tunggu :)");
-    // HospitalController.updatePatient(arguments[0], arguments[1], arguments.slice(2));
+    HospitalController.updatePatient(arguments[0], arguments[1], arguments.slice(2));
     break;
   case "deletePatient":
-    console.log("fitur belum terbuka, silakan tunggu :)");
-    // HospitalController.deletePatient(arguments[0], arguments[1], arguments.slice(2));
+    HospitalController.deletePatient(arguments[0]);
     break;
   case "logout":
     HospitalController.logout();
     break;
   case "show":
-    console.log("fitur belum terbuka, silakan tunggu :)");
-    // HospitalController.show(arguments[0]);
+    HospitalController.show(arguments[0]);
     break;
   case "findPatientBy":
     console.log("fitur belum terbuka, silakan tunggu :)");
