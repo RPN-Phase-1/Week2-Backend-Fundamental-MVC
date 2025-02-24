@@ -165,7 +165,6 @@ async function playGame() {
   makeGuess();
 }
 
-// Fungsi utama untuk menjalankan aplikasi
 async function main() {
   await loadUsers();
   startMenu();
