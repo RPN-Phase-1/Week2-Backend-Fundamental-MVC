@@ -29,12 +29,12 @@ function isPathClear(fromRow, fromCol, toRow, toCol) {
 
   while (currentRow !== toRow || currentCol !== toCol) {
     if (board[currentRow][currentCol] !== ' ') {
-      return false; // Jalur tidak bersih
+      return false;
     }
     currentRow += rowStep;
     currentCol += colStep;
   }
-  return true; // Jalur bersih
+  return true;
 }
 
 function isValidMove(from, to, currentPlayer) {
@@ -45,68 +45,67 @@ function isValidMove(from, to, currentPlayer) {
   const piece = board[fromRow][fromCol];
   const targetPiece = board[toRow][toCol];
 
-  // Cek apakah bidak yang dipilih sesuai dengan giliran pemain
+ 
   if ((currentPlayer === 'Putih' && piece === '♟') || (currentPlayer === 'Hitam' && piece === '♙')) {
     console.log('Anda tidak dapat menggerakkan bidak lawan!');
     return false;
   }
 
-  // Cek apakah gerakan valid berdasarkan jenis bidak
   switch (piece) {
-    case '♙': // Pion Putih
+    case '♙': 
       if (fromCol === toCol) {
-        // Gerakan maju
-        if (fromRow - toRow === 1 && targetPiece === ' ') return true; // Satu langkah
-        if (fromRow === 6 && fromRow - toRow === 2 && targetPiece === ' ') return true; // Dua langkah
+        
+        if (fromRow - toRow === 1 && targetPiece === ' ') return true; 
+        if (fromRow === 6 && fromRow - toRow === 2 && targetPiece === ' ') return true; 
       } else if (Math.abs(fromCol - toCol) === 1 && fromRow - toRow === 1 && targetPiece !== ' ') {
-        return true; // Menangkap
+        return true; 
       }
       break;
-    case '♟': // Pion Hitam
+    case '♟': 
       if (fromCol === toCol) {
-        // Gerakan maju
-        if (toRow - fromRow === 1 && targetPiece === ' ') return true; // Satu langkah
-        if (fromRow === 1 && toRow - fromRow === 2 && targetPiece === ' ') return true; // Dua langkah
+        
+        if (toRow - fromRow === 1 && targetPiece === ' ') return true; 
+        if (fromRow === 1 && toRow - fromRow === 2 && targetPiece === ' ') return true; 
       } else if (Math.abs(fromCol - toCol) === 1 && toRow - fromRow === 1 && targetPiece !== ' ') {
-        return true; // Menangkap
+        return true; 
       }
       break;
-    case '♘': // Kuda
+    case '♘': 
       if ((Math.abs(fromRow - toRow) === 2 && Math.abs(fromCol - toCol) === 1) ||
           (Math.abs(fromRow - toRow) === 1 && Math.abs(fromCol - toCol) === 2)) {
-        return true; // Gerakan Kuda valid
+        return true; 
       }
       break;
-    case '♗': // Gajah
+    case '♗': 
     case '♝':
       if (Math.abs(fromRow - toRow) === Math.abs(fromCol - toCol)) {
-        // Cek apakah jalur bebas
+        
         return isPathClear(fromRow, fromCol, toRow, toCol);
       }
       break;
-    case '♖': // Rook
+    case '♖': 
     case '♜':
       if (fromRow === toRow || fromCol === toCol) {
-        // Cek apakah jalur bebas
+        
         return isPathClear(fromRow, fromCol, toRow, toCol);
       }
       break;
-    case '♕': // Ratu
+    case '♕': 
     case '♛':
       if (Math.abs(fromRow - toRow) === Math.abs(fromCol - toCol) || 
           fromRow === toRow || fromCol === toCol) {
-        // Cek apakah jalur bebas
+        
         return isPathClear(fromRow, fromCol, toRow, toCol);
       }
       break;
-    case '♔': // Raja
+    case '♔': 
     case '♚':
       if (Math.abs(fromRow - toRow) <= 1 && Math.abs(fromCol - toCol) <= 1) {
-        return true; // Raja bergerak satu langkah ke segala arah
+        return true; 
       }
       break;
   }
-  return false; // Gerakan tidak valid
+  return false; 
 }
 
 function movePiece(from, to) {
@@ -118,23 +117,23 @@ function movePiece(from, to) {
   if (isValidMove(from, to, currentPlayer)) {
     const targetPiece = board[toRow][toCol];
 
-    // Jika ada bidak lawan di posisi tujuan, "bunuh" bidak tersebut
+    
     if (targetPiece !== ' ') {
       console.log(`Bidak ${targetPiece} di posisi ${to} telah dibunuh!`);
     }
 
-    // Pindahkan bidak
+    
     board[toRow][toCol] = board[fromRow][fromCol];
     board[fromRow][fromCol] = ' ';
     printBoard();
-    return true; // Gerakan valid
+    return true; 
   } else {
     console.log('Gerakan tidak valid!');
-    return false; // Gerakan tidak valid
+    return false; 
   }
 }
 
-let currentPlayer = 'Putih'; // Mulai dengan pemain putih
+let currentPlayer = 'Putih'; 
 
 function playGame() {
   const readline = require('readline').createInterface({
@@ -146,7 +145,7 @@ function playGame() {
     readline.question(`${currentPlayer}, masukkan gerakan (e.g., e2 e4): `, (input) => {
       const [from, to] = input.split(' ');
 
-      // Validasi input
+      
       if (!from || !to || from.length !== 2 || to.length !== 2) {
         console.log('Input tidak valid! Harap masukkan gerakan dalam format yang benar (e.g., e2 e4).');
         askMove();
@@ -154,14 +153,14 @@ function playGame() {
       }
 
       if (movePiece(from, to)) {
-        // Ganti giliran hanya jika gerakan valid
+        
         currentPlayer = currentPlayer === 'Putih' ? 'Hitam' : 'Putih'; 
       }
       askMove();
     });
   }
 
-  printBoard(); // Tampilkan papan sebelum permainan dimulai
+  printBoard(); 
   askMove();
 }
 
